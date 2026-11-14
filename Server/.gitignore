@@ -1,4 +1,9 @@
 
+# Environment variables
+.env
+
+# Google Cloud credentials
+config/service-account.json
 
 # Logs
 logs
@@ -9,18 +14,28 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies
+node_modules/
+
+# Build files
+dist/
+dist-ssr/
 *.local
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+# Google Cloud service account credentials
+Server/src/config/*.json
+src/config/*.json
+**/config/*.json
+
+# Environment variables
+.env
