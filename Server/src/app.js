@@ -121,8 +121,19 @@ app.use(express.json());
 app.use(cookieParser());
 
 // CORS configuration
+const allowedOrigins = new Set([
+    "http://localhost:5173",
+    "https://interviewai-14.onrender.com",
+    ...(process.env.CLIENT_URL || "")
+        .split(",")
+        .map((origin) => origin.trim().replace(/\/+$/, ""))
+        .filter(Boolean),
+]);
+
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: (origin, callback) => {
+        callback(null, !origin || allowedOrigins.has(origin));
+    },
     credentials: true
 }));
 

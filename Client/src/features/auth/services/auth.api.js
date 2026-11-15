@@ -165,12 +165,7 @@
 //     return response.data;
 // };
 
-import axios from "axios";
-
-const API = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "https://interviewai-7.onrender.com/api",
-    withCredentials: true,
-});
+import API from "../../../api.js";
 
 // REGISTER
 export const register = async ({ username, email, password }) => {

@@ -44,12 +44,7 @@
 // }
 
 
-import axios from "axios";
-
-const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "https://interviewai-7.onrender.com/api",
-    withCredentials: true,
-});
+import api from "../../../api.js";
 
 export const generateInterviewReport = async ({
     resumeFile,
