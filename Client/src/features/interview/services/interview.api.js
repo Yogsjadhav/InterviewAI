@@ -47,7 +47,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "https://interviewai-3-ghvr.onrender.com/",
+    baseURL: import.meta.env.VITE_API_URL || "https://interviewai-7.onrender.com/api",
     withCredentials: true,
 });
 
@@ -62,21 +62,21 @@ export const generateInterviewReport = async ({
     formData.append("selfDescription", selfDescription);
     formData.append("jobDescription", jobDescription);
 
-    const response = await api.post("/api/interview/", formData);
+    const response = await api.post("/interview/", formData);
 
     return response.data;
 };
 
 export const getAllInterviewReportById = async (interviewId) => {
     const response = await api.get(
-        `/api/interview/report/${interviewId}`
+        `/interview/report/${interviewId}`
     );
 
     return response.data;
 };
 
 export const getAllInterviewReports = async () => {
-    const response = await api.get("/api/interview/");
+    const response = await api.get("/interview/");
 
     return response.data;
 };
@@ -86,7 +86,7 @@ export const getAllInterviewReports = async () => {
  */
 export const generateResumePdf = async ({ InterviewReportId }) => {
     const response = await api.post(
-        `/api/interview/resume/pdf/${InterviewReportId}`,
+        `/interview/resume/pdf/${InterviewReportId}`,
         null,
         {
             responseType: "blob"
