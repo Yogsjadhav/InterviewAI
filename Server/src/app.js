@@ -67,6 +67,47 @@
 
 
 
+// const express = require("express");
+// const cookieParser = require("cookie-parser");
+// const cors = require("cors");
+
+// const AuthRouter = require("./routes/auth.routes");
+// const interviewRouter = require("./routes/interview.routes");
+
+// const app = express();
+
+// app.get("/", (req, res) => {
+//     res.status(200).json({
+//         success: true,
+//         message: "InterviewAI Backend Server is Running 🚀"
+//     });
+// });
+
+// const allowedOrigins = [
+//     "http://localhost:5173",
+//     "https://interviewai-0-1.onrender.com"
+// ];
+
+// app.use(cors({
+//     origin: function (origin, callback) {
+//         if (!origin || allowedOrigins.includes(origin)) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error("Not allowed by CORS: " + origin));
+//         }
+//     },
+//     credentials: true
+// }));
+
+// app.use(express.json());
+// app.use(cookieParser());
+
+// app.use("/api/auth", AuthRouter);
+// app.use("/api/interview", interviewRouter);
+
+// module.exports = app;
+
+
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -76,25 +117,24 @@ const interviewRouter = require("./routes/interview.routes");
 
 const app = express();
 
-const allowedOrigins = [
-    "http://localhost:5173",
-    "https://interviewai-0-1.onrender.com"
-];
-
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS: " + origin));
-        }
-    },
-    credentials: true
-}));
-
 app.use(express.json());
 app.use(cookieParser());
 
+// CORS configuration
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true
+}));
+
+// Backend health check
+app.get("/", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "InterviewAI Backend Server is Running 🚀"
+    });
+});
+
+// API routes
 app.use("/api/auth", AuthRouter);
 app.use("/api/interview", interviewRouter);
 
